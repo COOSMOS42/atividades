@@ -113,6 +113,6 @@ with st.form('dados', clear_on_submit=True, border=True):
                            include_column_header=False)
         st.success('Dados enviados com sucesso!')
         
-
-st.rerun()
+if st.button('Recarregar'):
+    st.rerun()
 
