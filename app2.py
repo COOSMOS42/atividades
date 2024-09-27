@@ -57,60 +57,59 @@ def adicionar(Residencial, Atividade, Registros):
 
 st.header('Controle de Atividades')
 
-#with st.form('dados', clear_on_submit=True, border=True): 
+with st.form('dados', clear_on_submit=True, border=True): 
     
-st.subheader('Atividade')
-op = st.selectbox('Escolha um dos residencias abaixo:',
-         ('Virgílio Távora I', 'Virgílio Távora II', 'Virgílio Távora III',
-         'Bonaparte Viana', 'Blanchard Girão', 'Demócrito Dummar I', 'Demócrito Dummar II', 'Demócrito Dummar III'))
-atv = st.selectbox('Escolha uma atividade',
-               ('Atv 01', 'Atv 02', 'Atv 03', 'Atv 04',
-                'Atv 08', 'Atv 09', 'Atv 10', 'Atv 11',
-                'Atv 12', 'Atv 13', 'Atv 14', 'Atv 15',
-                'Atv 16', 'Atv 17', 'Atv 18'))
+    st.subheader('Atividade')
+    op = st.selectbox('Escolha um dos residencias abaixo:',
+             ('Virgílio Távora I', 'Virgílio Távora II', 'Virgílio Távora III',
+             'Bonaparte Viana', 'Blanchard Girão', 'Demócrito Dummar I', 'Demócrito Dummar II', 'Demócrito Dummar III'))
+    atv = st.selectbox('Escolha uma atividade',
+                   ('Atv 01', 'Atv 02', 'Atv 03', 'Atv 04',
+                    'Atv 08', 'Atv 09', 'Atv 10', 'Atv 11',
+                    'Atv 12', 'Atv 13', 'Atv 14', 'Atv 15',
+                    'Atv 16', 'Atv 17', 'Atv 18'))
+    
+    
+    col1, col2 = st.columns([2, 2])
+    with col1:
+        st.subheader('Registros')
+        ch1 = st.checkbox('Registro Fotográfico')
+        ch2 = st.checkbox('Folders/Cartilhas/Apostilas')
+        ch3 = st.checkbox('Lista de Presença')
+        ch4 = st.checkbox('Ata da Reunião')
+    with col2:
+        st.subheader('')
+        ch5 = st.checkbox('Registro de Avaliação')
+        ch6 = st.checkbox('Vídeos(links)')
+        ch7 = st.checkbox('Slides')
+        ch8 = st.checkbox('Outros(cartazes/convites)')
+    
+    if ch1:
+        st.session_state.jsoninput = adicionar(op, atv, 'Registro Fotográfico')
+    if ch2:
+        st.session_state.jsoninput = adicionar(op, atv, 'Folders/Cartilhas/Apostilas')
+    if ch3:
+        st.session_state.jsoninput = adicionar(op, atv, 'Lista de Presença')
+    if ch4:
+        st.session_state.jsoninput = adicionar(op, atv, 'Ata da Reunião')
+    if ch5:
+        st.session_state.jsoninput = adicionar(op, atv, 'Registro de Avaliação')
+    if ch6:
+        st.session_state.jsoninput = adicionar(op, atv, 'Vídeos(links)')
+    if ch7:
+        st.session_state.jsoninput = adicionar(op, atv, 'Slides')
+    if ch8:
+        st.session_state.jsoninput = adicionar(op, atv, 'Outros(cartazes/convites)')
+    
+    st.subheader('Adicionar Entrega')
+    
+    st.session_state.jsoninput = pd.DataFrame(st.session_state.jsoninput)
 
 
-col1, col2 = st.columns([2, 2])
-with col1:
-    st.subheader('Registros')
-    ch1 = st.checkbox('Registro Fotográfico')
-    ch2 = st.checkbox('Folders/Cartilhas/Apostilas')
-    ch3 = st.checkbox('Lista de Presença')
-    ch4 = st.checkbox('Ata da Reunião')
-with col2:
-    st.subheader('')
-    ch5 = st.checkbox('Registro de Avaliação')
-    ch6 = st.checkbox('Vídeos(links)')
-    ch7 = st.checkbox('Slides')
-    ch8 = st.checkbox('Outros(cartazes/convites)')
-
-if ch1:
-    st.session_state.jsoninput = adicionar(op, atv, 'Registro Fotográfico')
-if ch2:
-    st.session_state.jsoninput = adicionar(op, atv, 'Folders/Cartilhas/Apostilas')
-if ch3:
-    st.session_state.jsoninput = adicionar(op, atv, 'Lista de Presença')
-if ch4:
-    st.session_state.jsoninput = adicionar(op, atv, 'Ata da Reunião')
-if ch5:
-    st.session_state.jsoninput = adicionar(op, atv, 'Registro de Avaliação')
-if ch6:
-    st.session_state.jsoninput = adicionar(op, atv, 'Vídeos(links)')
-if ch7:
-    st.session_state.jsoninput = adicionar(op, atv, 'Slides')
-if ch8:
-    st.session_state.jsoninput = adicionar(op, atv, 'Outros(cartazes/convites)')
-
-st.subheader('Adicionar Entrega')
-
-st.session_state.jsoninput = pd.DataFrame(st.session_state.jsoninput)
-
-
-#    if st.form_submit_button('Adicionar'):
-if st.button('Adicionar'):
-    set_with_dataframe(sheet,
-                       st.session_state.jsoninput,
-                       row=len(sheet.col_values(1)) + 1,
-                       include_column_header=False)
-    st.success('Dados enviados com sucesso!')
+    if st.form_submit_button('Adicionar'):
+        set_with_dataframe(sheet,
+                           st.session_state.jsoninput,
+                           row=len(sheet.col_values(1)) + 1,
+                           include_column_header=False)
+        st.success('Dados enviados com sucesso!')
 
