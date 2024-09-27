@@ -112,4 +112,5 @@ with st.form('dados', clear_on_submit=True, border=True):
                            row=len(sheet.col_values(1)) + 1,
                            include_column_header=False)
         st.success('Dados enviados com sucesso!')
+        st.experimental_rerun()
 
