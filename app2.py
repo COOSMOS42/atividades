@@ -4,9 +4,11 @@ Created on Thu Sep 12 14:04:54 2024
 
 @author: jgabriel
 """
-
+#biblioteca stramlit para a criação do aplicativo 
 import streamlit as st
+#biblioteca para criar as tabelas 
 import pandas as pd
+#bibliotecas para fazer o link entre o google sheets e a aplicativo
 from google.oauth2 import service_account
 from gspread_pandas import Spread, Client
 from gspread_dataframe import set_with_dataframe
@@ -37,13 +39,14 @@ fr = fr[1:]
 fr.columns = cab
 
 
-
+#lista dos dados imputados 
 if 'jsoninput' not in st.session_state:
     st.session_state.jsoninput = None
         
-def adicionar(Residencial, Atividade, Registros):
+def adicionar(Residencial, Parcela, Atividade, Registros):
     entrega = {
         'residencial': Residencial,
+        'parcela' : Parcela,
         'atividade': Atividade,
         'registros': Registros
     }
@@ -63,6 +66,13 @@ with st.form('dados', clear_on_submit=True, border=True):
     op = st.selectbox('Escolha um dos residencias abaixo:',
              ('Virgílio Távora I', 'Virgílio Távora II', 'Virgílio Távora III',
              'Bonaparte Viana', 'Blanchard Girão', 'Demócrito Dummar I', 'Demócrito Dummar II', 'Demócrito Dummar III'))
+
+#seleção das parcelas 03/10/2024
+    par = st.selectbox('Qual a parcela',
+                       ('I', 'II', 'III',
+                        'IV', 'V', 'VI', 'VII',
+                        'VIII', 'IX', 'X', 'XI', 'XII')
+
     atv = st.selectbox('Escolha uma atividade',
                    ('Atv 01', 'Atv 02', 'Atv 03', 'Atv 04',
                     'Atv 08', 'Atv 09', 'Atv 10', 'Atv 11',
@@ -85,21 +95,21 @@ with st.form('dados', clear_on_submit=True, border=True):
         ch8 = st.checkbox('Outros(cartazes/convites)')
     
     if ch1:
-        st.session_state.jsoninput = adicionar(op, atv, 'Registro Fotográfico')
+        st.session_state.jsoninput = adicionar(op, par, atv, 'Registro Fotográfico')
     if ch2:
-        st.session_state.jsoninput = adicionar(op, atv, 'Folders/Cartilhas/Apostilas')
+        st.session_state.jsoninput = adicionar(op, par, atv, 'Folders/Cartilhas/Apostilas')
     if ch3:
-        st.session_state.jsoninput = adicionar(op, atv, 'Lista de Presença')
+        st.session_state.jsoninput = adicionar(op, par,  atv, 'Lista de Presença')
     if ch4:
-        st.session_state.jsoninput = adicionar(op, atv, 'Ata da Reunião')
+        st.session_state.jsoninput = adicionar(op, par, atv, 'Ata da Reunião')
     if ch5:
-        st.session_state.jsoninput = adicionar(op, atv, 'Registro de Avaliação')
+        st.session_state.jsoninput = adicionar(op, par, atv, 'Registro de Avaliação')
     if ch6:
-        st.session_state.jsoninput = adicionar(op, atv, 'Vídeos(links)')
+        st.session_state.jsoninput = adicionar(op, par, atv, 'Vídeos(links)')
     if ch7:
-        st.session_state.jsoninput = adicionar(op, atv, 'Slides')
+        st.session_state.jsoninput = adicionar(op, par, atv, 'Slides')
     if ch8:
-        st.session_state.jsoninput = adicionar(op, atv, 'Outros(cartazes/convites)')
+        st.session_state.jsoninput = adicionar(op, par, atv, 'Outros(cartazes/convites)')
     
     st.subheader('Adicionar Entrega')
     
