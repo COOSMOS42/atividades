@@ -71,7 +71,7 @@ with st.form('dados', clear_on_submit=True, border=True):
     par = st.selectbox('Qual a parcela',
                        ('I', 'II', 'III',
                         'IV', 'V', 'VI', 'VII',
-                        'VIII', 'IX', 'X', 'XI', 'XII')
+                        'VIII', 'IX', 'X', 'XI', 'XII'))
 
     atv = st.selectbox('Escolha uma atividade',
                    ('Atv 01', 'Atv 02', 'Atv 03', 'Atv 04',
