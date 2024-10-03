@@ -75,6 +75,7 @@ with st.form('dados', clear_on_submit=True, border=True):
 
     atv = st.selectbox('Escolha uma atividade',
                    ('Atv 01', 'Atv 02', 'Atv 03', 'Atv 04',
+                    'Atv 05', 'Atv 06', 'Atv 07',
                     'Atv 08', 'Atv 09', 'Atv 10', 'Atv 11',
                     'Atv 12', 'Atv 13', 'Atv 14', 'Atv 15',
                     'Atv 16', 'Atv 17', 'Atv 18'))
